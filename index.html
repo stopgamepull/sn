@@ -1,0 +1,1378 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JustMintIt | Exclusive Sneaker NFTs</title>
+    <link rel="shortcut icon" href="images/fav.png" type="image/png">
+    <style>
+        :root {
+            --primary: #1FC7D4;
+            --primary-dark: #1AAFB9;
+            --primary-light: #8DE2FF;
+            --secondary: #31D0AA;
+            --bg: #0B0B0B;
+            --surface: #1E1E1E;
+            --error: #ED4B9E;
+            --on-bg: #FFFFFF;
+            --on-surface: #F4EEFF;
+            --on-primary: #000000;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Kanit', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg);     
+            background-color: #fff;
+            color: var(--on-bg);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(49, 208, 170, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(31, 199, 212, 0.15) 0%, transparent 20%);
+        }
+        
+        /* Splash Screen */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+            animation: fadeOut 1s ease-in-out 2s forwards;
+        }
+        
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+        
+        .logo-animation {
+            font-size: 4rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .logo-animation::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            animation: slideOut 1s ease-in-out 1.5s forwards;
+        }
+        
+        @keyframes slideOut {
+            from { transform: translateX(0); }
+            to { transform: translateX(100%); }
+        }
+        
+        /* Main Content */
+        .main-content {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out 2.5s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .connect-btn {
+            background: var(--gradient);
+            color: var(--on-primary);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(31, 199, 212, 0.3);
+        }
+        
+        .connect-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(31, 199, 212, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 3rem 1rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--gradient);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+
+
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+ 
+
+        }
+        
+        /* Counter Section */
+        .counter-section {
+            padding: 2rem 1rem;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 3rem;
+        }
+        
+        .counter-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .counter {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Kanit', sans-serif;
+        }
+        
+        .counter-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            width: 90%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Mint Section */
+        .mint-section {
+            text-align: center;
+            padding: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .mint-btn {
+            background: var(--gradient);
+            color: var(--on-primary);
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(31, 199, 212, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 1rem 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .mint-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(31, 199, 212, 0.4);
+        }
+        
+        .mint-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .mint-btn:disabled {
+            background: var(--surface);
+            color: rgba(255, 255, 255, 0.3);
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+        
+        .mint-btn.hidden {
+            display: none;
+        }
+        
+        .view-all-btn {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 1rem 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .view-all-btn:hover {
+            background: rgba(49, 208, 170, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .view-all-btn.hidden {
+            display: none;
+        }
+        
+        /* Sneaker Card */
+        .sneaker-card {
+            max-width: 320px;
+            margin: 2rem auto;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--surface);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: scale(0.95);
+            transition: all 0.3s;
+            opacity: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .sneaker-card.visible {
+            opacity: 1;
+            transform: scale(1);
+            animation: cardReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        @keyframes cardReveal {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card-info {
+            padding: 1.5rem;
+            position: relative;
+        }
+        
+        .card-rarity {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .common { 
+            background-color: #8e8e8e;
+            box-shadow: 0 0 10px rgba(142, 142, 142, 0.5);
+        }
+        .uncommon { 
+            background-color: #4caf50;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+        .rare { 
+            background-color: #2196f3;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+        .legendary { 
+            background-color: #ff9800;
+            box-shadow: 0 0 15px rgba(255, 152, 0, 0.7);
+        }
+        
+        .card-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--on-surface);
+        }
+        
+        .card-id {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            background-color: var(--surface);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            padding: 2rem;
+            text-align: center;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .modal-message {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .modal-sneaker {
+            margin: 1.5rem 0;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 10;
+        }
+        
+        .modal-close:hover {
+            color: var(--secondary);
+        }
+        
+        /* All Sneakers Modal */
+        .all-sneakers-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            padding: 2rem 0;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+        }
+        
+        .all-sneakers-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .all-sneakers-content {
+            background-color: var(--surface);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        
+        .all-sneakers-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .rarity-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .rarity-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--on-surface);
+        }
+        
+        .rarity-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+        
+        .sneakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.2rem;
+        }
+        
+        .grid-sneaker {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .grid-sneaker:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: rgba(31, 199, 212, 0.3);
+        }
+        
+        .grid-sneaker-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .grid-sneaker-info {
+            padding: 1rem;
+        }
+        
+        .grid-sneaker-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--on-surface);
+        }
+        
+        .grid-sneaker-id {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 1rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-links-footer {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-link-footer {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+            color: var(--primary);
+        }
+        
+        .social-link-footer:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+
+     
+    color: var(--gradient);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+        }
+        
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .counter {
+                font-size: 2.5rem;
+            }
+            
+            .sneakers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+
+         /* Sneaker Card */
+         .sneaker-card {
+            max-width: 320px;
+            margin: 2rem auto;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--surface);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: scale(0.95);
+            transition: all 0.3s;
+            opacity: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .sneaker-card.common {
+            background: linear-gradient(135deg, rgba(142, 142, 142, 0.2), rgba(30, 30, 30, 0.8));
+            border: 1px solid rgba(142, 142, 142, 0.3);
+        }
+
+        .sneaker-card.uncommon {
+            background: linear-gradient(135deg, rgb(76 175 80 / 60%), rgb(50 147 39 / 80%));
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .sneaker-card.rare {
+            background: linear-gradient(135deg, rgb(33 150 243 / 50%), rgb(15 93 209 / 80%));
+            border: 1px solid rgba(33, 150, 243, 0.3);
+        }
+
+        .sneaker-card.legendary {
+            background: linear-gradient(135deg, rgb(255 152 0 / 48%), rgb(195 114 27 / 80%));
+            border: 1px solid rgba(255, 152, 0, 0.3);
+        }
+
+        /* Grid Sneaker */
+        .grid-sneaker.common {
+            background: linear-gradient(135deg, rgba(142, 142, 142, 0.2), rgba(30, 30, 30, 0.8));
+            border: 1px solid rgba(142, 142, 142, 0.2);
+        }
+
+        .grid-sneaker.uncommon {
+            background: linear-gradient(135deg, rgb(76 175 80 / 60%), rgb(50 147 39 / 80%));
+            border: 1px solid rgba(76, 175, 80, 0.2);
+        }
+
+        .grid-sneaker.rare {
+            background: linear-gradient(135deg, rgb(33 150 243 / 50%), rgb(15 93 209 / 80%));
+            border: 1px solid rgba(33, 150, 243, 0.2);
+        }
+
+        .grid-sneaker.legendary {
+            background: linear-gradient(135deg, rgb(255 152 0 / 48%), rgb(195 114 27 / 80%));
+            border: 1px solid rgba(255, 152, 0, 0.2);
+        }
+
+         /* Confetti styles */
+         .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+            animation: confetti-fall 3s ease-in-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Different colors for confetti */
+        .confetti-1 { background-color: #1FC7D4; }
+        .confetti-2 { background-color: #31D0AA; }
+        .confetti-3 { background-color: #ED4B9E; }
+        .confetti-4 { background-color: #FF9800; }
+        .confetti-5 { background-color: #2196F3; }
+        .confetti-6 { background-color: #4CAF50; }
+
+        /* Sneaker Actions */
+.sneaker-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.sneaker-actions.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.share-btn, .trade-btn {
+    flex: 1;
+    padding: 0.8rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: none;
+    max-width: 150px;
+}
+
+.share-btn {
+    background: var(--gradient);
+    color: var(--on-primary);
+    box-shadow: 0 4px 15px rgba(31, 199, 212, 0.3);
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(31, 199, 212, 0.4);
+}
+
+.trade-btn {
+    background: rgba(0, 0, 0, 0.1);
+    color: #000;
+    cursor: not-allowed;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trade-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+    </style>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    
+    <!-- Splash Screen -->
+    <div class="splash-screen">
+        <div class="logo-animation">JustMintIt</div>
+    </div>
+    
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <div class="logo">JustMintIt</div>
+            <button class="connect-btn" id="connectBtn">
+                <i class="fas fa-wallet"></i>
+                Connect Wallet
+            </button>
+        </header>
+        
+        <section class="hero">
+            <h1 class="hero-title">SNEAKERS COLLECTION</h1>
+            <p class="hero-subtitle">Mint your digital sneakers NFT for free! First limited 100 pairs collection.</p>
+        </section>
+        
+        <div class="counter-section">
+            <h2 class="counter-title">Collection Progress</h2>
+            <div class="counter" id="minted-counter">90/100</div>
+            <p class="counter-label" id="remaining-label">10 remaining</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+        
+        <div class="mint-section">
+            <button class="mint-btn" id="mintBtn">
+                <i class="fas fa-plus-circle"></i>
+                Mint Your Sneaker
+            </button>
+            
+            <button class="view-all-btn hidden" id="viewAllBtn">
+                <i class="fas fa-shoe-prints"></i>
+                View All Sneakers
+            </button>
+            
+            <div class="sneaker-card hidden" id="sneakerCard">
+                <img src="" alt="Sneaker" class="card-image" id="cardImage">
+                <div class="card-info">
+                    <span class="card-rarity" id="cardRarity">COMMON</span>
+                    <h3 class="card-name" id="cardName">Sneaker Name</h3>
+                    <p class="card-id" id="cardId">#000</p>
+                </div>
+            </div>
+
+            <div class="sneaker-actions hidden" id="sneakerActions">
+                <button class="share-btn" id="shareBtn">
+                    <i class="fab fa-twitter"></i>
+                    Share to X
+                </button>
+                <button class="trade-btn" id="tradeBtn" disabled="">
+                    <i class="fas fa-exchange-alt"></i>
+                    Trade
+                </button>
+            </div>
+        </div>
+        
+        <!-- Success Modal -->
+        <div class="modal" id="successModal">
+            <div class="modal-content">
+                <button class="modal-close" id="modalClose">�</button>
+                <h3 class="modal-title">Congratulations!</h3>
+                <p class="modal-message">You've successfully minted your exclusive sneaker NFT!</p>
+                
+                <div class="modal-sneaker">
+                    <span class="card-rarity" id="modalRarity">COMMON</span>
+                    <img src="" alt="Sneaker" class="card-image" id="modalImage">
+                    <h3 class="card-name" id="modalName">Sneaker Name</h3>
+                    <p class="card-id" id="modalId">#000</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- All Sneakers Modal -->
+        <div class="all-sneakers-modal" id="allSneakersModal">
+            <div class="all-sneakers-content">
+                <button class="modal-close" id="closeAllBtn">�</button>
+                <h2 class="all-sneakers-title">JustMintIt Collection</h2>
+                
+                <div class="rarity-section">
+                    <h3 class="rarity-title">
+                        <span class="rarity-dot common"></span>
+                        Common Sneakers
+                    </h3>
+                    <div class="sneakers-grid" id="commonGrid">
+                        <!-- Common sneakers will be added here -->
+                    </div>
+                </div>
+                
+                <div class="rarity-section">
+                    <h3 class="rarity-title">
+                        <span class="rarity-dot uncommon"></span>
+                        Uncommon Sneakers
+                    </h3>
+                    <div class="sneakers-grid" id="uncommonGrid">
+                        <!-- Uncommon sneakers will be added here -->
+                    </div>
+                </div>
+                
+                <div class="rarity-section">
+                    <h3 class="rarity-title">
+                        <span class="rarity-dot rare"></span>
+                        Rare Sneakers
+                    </h3>
+                    <div class="sneakers-grid" id="rareGrid">
+                        <!-- Rare sneakers will be added here -->
+                    </div>
+                </div>
+                
+                <div class="rarity-section">
+                    <h3 class="rarity-title">
+                        <span class="rarity-dot legendary"></span>
+                        Legendary Sneakers
+                    </h3>
+                    <div class="sneakers-grid" id="legendaryGrid">
+                        <!-- Legendary sneakers will be added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="social-links-footer">
+                <a href="https://x.com/Just_MintIt" class="social-link-footer" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+            <p class="copyright">© 2023 JustMintIt.</p>
+        </footer>
+    </div>
+
+    <div class="confetti-container" id="confettiContainer"></div>
+    <script>
+        // Full collection of 100 sneakers with minted status
+        const fullCollection = [
+            // Common (60 items)
+            { id: 1, name: "Urban Walker", rarity: "common", image: "./6.jpg", minted: false },
+            { id: 2, name: "Concrete Stride", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 3, name: "City Hustle", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 4, name: "Pavement Pounder", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 5, name: "Sidewalk Cruiser", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 6, name: "Alley Dasher", rarity: "common", image: "./6.jpg", minted: false },
+            { id: 7, name: "Street Runner", rarity: "common", image: "./9.jpg", minted: false },
+            { id: 8, name: "Metro Jogger", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 9, name: "Downtown Dash", rarity: "common", image: "./6.jpg", minted: false },
+            { id: 10, name: "Boulevard Cruiser", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 11, name: "Avenue Glide", rarity: "common", image: "./9.jpg", minted: false },
+            { id: 12, name: "Crosswalk Sprint", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 13, name: "Subway Stride", rarity: "common", image: "./6.jpg", minted: false },
+            { id: 14, name: "Plaza Pace", rarity: "common", image: "./9.jpg", minted: false },
+            { id: 15, name: "Market March", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 16, name: "Lane Walker", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 17, name: "Pathfinder", rarity: "common", image: "./6.jpg", minted: false },
+            { id: 18, name: "Trailblazer", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 19, name: "Urban Trek", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 20, name: "City Trekker", rarity: "common", image: "./9.jpg", minted: false },
+            { id: 21, name: "Metro Trek", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 22, name: "Downtown Trek", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 23, name: "Boulevard Trek", rarity: "common", image: "./6.jpg", minted: false },
+            { id: 24, name: "Avenue Trek", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 25, name: "Crosswalk Trek", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 26, name: "Subway Trek", rarity: "common", image: "./9.jpg", minted: false },
+            { id: 27, name: "Plaza Trek", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 28, name: "Market Trek", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 29, name: "Lane Trek", rarity: "common", image: "./6.jpg", minted: false },
+            { id: 30, name: "Path Trek", rarity: "common", image: "./6.jpg", minted: false },
+            { id: 31, name: "Trail Trek", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 32, name: "Urban Trail", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 33, name: "City Trail", rarity: "common", image: "./9.jpg", minted: false },
+            { id: 34, name: "Metro Trail", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 35, name: "Downtown Trail", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 36, name: "Boulevard Trail", rarity: "common", image: "./6.jpg", minted: false },
+            { id: 37, name: "Avenue Trail", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 38, name: "Crosswalk Trail", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 39, name: "Subway Trail", rarity: "common", image: "./9.jpg", minted: false },
+            { id: 40, name: "Plaza Trail", rarity: "common", image: "./6.jpg", minted: false },
+            { id: 41, name: "Market Trail", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 42, name: "Lane Trail", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 43, name: "Path Trail", rarity: "common", image: "./9.jpg", minted: false },
+            { id: 44, name: "Trail Trail", rarity: "common", image: "./6.jpg", minted: false },
+            { id: 45, name: "Urban Path", rarity: "common", image: "./9.jpg", minted: false },
+            { id: 46, name: "City Path", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 47, name: "Metro Path", rarity: "common", image: "./9.jpg", minted: false },
+            { id: 48, name: "Downtown Path", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 49, name: "Boulevard Path", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 50, name: "Avenue Path", rarity: "common", image: "./9.jpg", minted: false },
+            { id: 51, name: "Crosswalk Path", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 52, name: "Subway Path", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 53, name: "Plaza Path", rarity: "common", image: "./6.jpg", minted: false },
+            { id: 54, name: "Market Path", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 55, name: "Lane Path", rarity: "common", image: "./9.jpg", minted: false },
+            { id: 56, name: "Path Path", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 57, name: "Trail Path", rarity: "common", image: "./6.jpg", minted: false },
+            { id: 58, name: "Urban Lane", rarity: "common", image: "./7.jpg", minted: false },
+            { id: 59, name: "City Lane", rarity: "common", image: "./8.jpg", minted: false },
+            { id: 60, name: "Metro Lane", rarity: "common", image: "./9.jpg", minted: false },
+            
+            // Uncommon (25 items)
+            { id: 61, name: "Neon Glide", rarity: "uncommon", image: "./16.jpg", minted: false },
+            { id: 62, name: "Aqua Flow", rarity: "uncommon", image: "./17.jpg", minted: false },
+            { id: 63, name: "Solar Step", rarity: "uncommon", image: "./18.jpg", minted: false },
+            { id: 64, name: "Electric Stride", rarity: "uncommon", image: "./19.jpg", minted: false },
+            { id: 65, name: "Lunar Glide", rarity: "uncommon", image: "./20.jpg", minted: false },
+            { id: 66, name: "Cosmic Flow", rarity: "uncommon", image: "./16.jpg", minted: false },
+            { id: 67, name: "Galactic Step", rarity: "uncommon", image: "./17.jpg", minted: false },
+            { id: 68, name: "Stellar Stride", rarity: "uncommon", image: "./18.jpg", minted: false },
+            { id: 69, name: "Plasma Glide", rarity: "uncommon", image: "./19.jpg", minted: false },
+            { id: 70, name: "Quantum Flow", rarity: "uncommon", image: "./20.jpg", minted: false },
+            { id: 71, name: "Atomic Step", rarity: "uncommon", image: "./16.jpg", minted: false },
+            { id: 72, name: "Neon Stride", rarity: "uncommon", image: "./17.jpg", minted: false },
+            { id: 73, name: "Aqua Glide", rarity: "uncommon", image: "./18.jpg", minted: false },
+            { id: 74, name: "Solar Flow", rarity: "uncommon", image: "./19.jpg", minted: false },
+            { id: 75, name: "Electric Step", rarity: "uncommon", image: "./20.jpg", minted: false },
+            { id: 76, name: "Lunar Stride", rarity: "uncommon", image: "./16.jpg", minted: false },
+            { id: 77, name: "Cosmic Glide", rarity: "uncommon", image: "./17.jpg", minted: false },
+            { id: 78, name: "Galactic Flow", rarity: "uncommon", image: "./18.jpg", minted: false },
+            { id: 79, name: "Stellar Step", rarity: "uncommon", image: "./19.jpg", minted: false },
+            { id: 80, name: "Plasma Stride", rarity: "uncommon", image: "./20.jpg", minted: false },
+            { id: 81, name: "Quantum Glide", rarity: "uncommon", image: "./16.jpg", minted: false },
+            { id: 82, name: "Atomic Flow", rarity: "uncommon", image: "./17.jpg", minted: false },
+            { id: 83, name: "Neon Step", rarity: "uncommon", image: "./18.jpg", minted: false },
+            { id: 84, name: "Aqua Stride", rarity: "uncommon", image: "./19.jpg", minted: false },
+            { id: 85, name: "Solar Glide", rarity: "uncommon", image: "./20.jpg", minted: false }, // Not minted
+            
+            // Rare (10 items)
+            { id: 86, name: "Skybound", rarity: "rare", image: "./2.jpg", minted: false },
+            { id: 87, name: "Phantom Dash", rarity: "rare", image: "./4.jpg", minted: false },
+            { id: 88, name: "Cosmic Runner", rarity: "rare", image: "./5.jpg", minted: false },
+            { id: 89, name: "Velocity", rarity: "rare", image: "./4.jpg", minted: false },
+            { id: 90, name: "Hyperion", rarity: "rare", image: "./1.jpg", minted: false },
+            { id: 91, name: "Nova", rarity: "rare", image: "./2.jpg", minted: false },
+            { id: 92, name: "Infinity", rarity: "rare", image: "./3.jpg", minted: false },
+            { id: 93, name: "Zenith", rarity: "rare", image: "./4.jpg", minted: false },
+            { id: 94, name: "Apex", rarity: "rare", image: "./5.jpg", minted: false }, // Not minted
+            { id: 95, name: "Odyssey", rarity: "rare", image: "./3.jpg", minted: false }, // Not minted
+            
+            // Legendary (5 items)
+            { id: 96, name: "Golden Eclipse", rarity: "legendary", image: "./10.jpg", minted: false },
+            { id: 97, name: "Diamond Phantom", rarity: "legendary", image: "./12.jpg", minted: false },
+            { id: 98, name: "Platinum Nova", rarity: "legendary", image: "./13.jpg", minted: false },
+            { id: 99, name: "Titanium Zenith", rarity: "legendary", image: "./14.jpg", minted: false }, // Not minted
+            { id: 100, name: "Obsidian Apex", rarity: "legendary", image: "./15.jpg", minted: false } // Not minted
+        ];
+
+        // State
+        let mintedCount = fullCollection.filter(s => s.minted).length;
+        const maxCount = fullCollection.length;
+        let userSneaker = null;
+        let isConnected = false;
+
+        // DOM elements
+        const mintedCounter = document.getElementById('minted-counter');
+        const remainingLabel = document.getElementById('remaining-label');
+        const progressFill = document.getElementById('progressFill');
+        const mintBtn = document.getElementById('mintBtn');
+        const connectBtn = document.getElementById('connectBtn');
+        const viewAllBtn = document.getElementById('viewAllBtn');
+        const sneakerCard = document.getElementById('sneakerCard');
+        const successModal = document.getElementById('successModal');
+        const modalClose = document.getElementById('modalClose');
+        const allSneakersModal = document.getElementById('allSneakersModal');
+        const closeAllBtn = document.getElementById('closeAllBtn');
+        
+        // Card elements
+        const cardImage = document.getElementById('cardImage');
+        const cardName = document.getElementById('cardName');
+        const cardId = document.getElementById('cardId');
+        const cardRarity = document.getElementById('cardRarity');
+        
+        // Modal elements
+        const modalImage = document.getElementById('modalImage');
+        const modalName = document.getElementById('modalName');
+        const modalId = document.getElementById('modalId');
+        const modalRarity = document.getElementById('modalRarity');
+        
+        // Grid elements
+        const commonGrid = document.getElementById('commonGrid');
+        const uncommonGrid = document.getElementById('uncommonGrid');
+        const rareGrid = document.getElementById('rareGrid');
+        const legendaryGrid = document.getElementById('legendaryGrid');
+
+        // Initialize the app
+        function init() {
+            updateCounter();
+            createParticles();
+            
+            // Update all sneakers grid
+            updateAllSneakersGrid();
+            
+            // Event listeners
+            mintBtn.addEventListener('click', mintSneaker);
+            connectBtn.addEventListener('click', connectWallet);
+            viewAllBtn.addEventListener('click', showAllSneakers);
+            modalClose.addEventListener('click', () => toggleModal(successModal, false));
+            closeAllBtn.addEventListener('click', () => toggleModal(allSneakersModal, false));
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === successModal) toggleModal(successModal, false);
+                if (e.target === allSneakersModal) toggleModal(allSneakersModal, false);
+            });
+
+            document.getElementById('shareBtn').addEventListener('click', shareOnTwitter);
+        }
+
+        function shareOnTwitter() {
+    if (!userSneaker) return;
+    
+    const text = `Just minted my exclusive ${userSneaker.name} sneaker NFT #${userSneaker.id} on @JustMintIt! Check it out!`;
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+}
+
+        // Connect wallet
+        function connectWallet() {
+            if (isConnected) return;
+            
+            connectBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting...';
+            
+            // Simulate wallet connection
+            setTimeout(() => {
+                isConnected = true;
+                connectBtn.innerHTML = '<i class="fas fa-check-circle"></i> Connected';
+                connectBtn.style.background = 'var(--secondary)';
+                
+                // Enable mint button
+                mintBtn.disabled = false;
+            }, 1500);
+        }
+
+        // Toggle modal visibility
+        function toggleModal(modal, show) {
+            if (show) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Mint a sneaker
+        function mintSneaker() {
+      
+         
+            // Disable mint button during process
+            mintBtn.disabled = true;
+            mintBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Minting...';
+            
+            // Simulate minting delay
+            setTimeout(() => {
+                // Get random unminted sneaker based on rarity distribution
+                const sneaker = getRandomUnmintedSneaker();
+                
+                if (!sneaker) {
+                    alert('No more sneakers available to mint!');
+                    mintBtn.disabled = true;
+                    mintBtn.innerHTML = '<i class="fas fa-times-circle"></i> Sold Out';
+                    return;
+                }
+                
+                // Mark as minted
+                sneaker.minted = true;
+                userSneaker = sneaker;
+                mintedCount++;
+                
+                // Update UI
+                updateCounter();
+                showUserSneaker(sneaker);
+                
+                // Show success modal briefly
+                showSuccessModal(sneaker);
+                
+                // Hide mint button, show view all button
+                if (mintedCount >= maxCount) {
+                    mintBtn.disabled = true;
+                    mintBtn.innerHTML = '<i class="fas fa-times-circle"></i> Sold Out';
+                } else {
+                    mintBtn.disabled = false;
+                    mintBtn.style.display = "none";
+                    mintBtn.innerHTML = '<i class="fas fa-plus-circle"></i> Mint Your Sneaker';
+                }
+                
+                viewAllBtn.classList.remove('hidden');
+                
+                // Update all sneakers grid
+                updateAllSneakersGrid();
+            }, 2000);
+        }
+
+        // Get random unminted sneaker with rarity distribution
+        function getRandomUnmintedSneaker() {
+            const unmintedSneakers = fullCollection.filter(s => !s.minted);
+            
+            if (unmintedSneakers.length === 0) {
+                return null;
+            }
+            
+            const rand = Math.random();
+            let rarity;
+            
+            // Determine rarity based on probability
+            if (rand < 0.6) rarity = "common";
+            else if (rand < 0.85) rarity = "uncommon";
+            else if (rand < 0.95) rarity = "rare";
+            else rarity = "legendary";
+            
+            // Filter unminted sneakers by rarity
+            const availableByRarity = unmintedSneakers.filter(s => s.rarity === rarity);
+            
+            // If we have sneakers with this rarity, pick random
+            if (availableByRarity.length > 0) {
+                const randomIndex = Math.floor(Math.random() * availableByRarity.length);
+                return availableByRarity[randomIndex];
+            }
+            
+            // If no sneakers with this rarity, pick from any unminted
+            const randomIndex = Math.floor(Math.random() * unmintedSneakers.length);
+            return unmintedSneakers[randomIndex];
+        }
+
+        // Show user's sneaker
+        function showUserSneaker(sneaker) {
+    cardImage.src = sneaker.image;
+    cardName.textContent = sneaker.name;
+    cardId.textContent = `#${sneaker.id}`;
+    cardRarity.textContent = sneaker.rarity.toUpperCase();
+    cardRarity.className = `card-rarity ${sneaker.rarity}`;
+    sneakerCard.className = `sneaker-card visible ${sneaker.rarity}`;
+    sneakerCard.classList.remove('hidden');
+    
+    // Показываем кнопки действий с анимацией
+    setTimeout(() => {
+        document.getElementById('sneakerActions').classList.remove('hidden');
+        document.getElementById('sneakerActions').classList.add('visible');
+    }, 300);
+}
+
+        // Show success modal
+        function showSuccessModal(sneaker) {
+            modalImage.src = sneaker.image;
+            modalName.textContent = sneaker.name;
+            modalId.textContent = `#${sneaker.id}`;
+            modalRarity.textContent = sneaker.rarity.toUpperCase();
+            modalRarity.className = `card-rarity ${sneaker.rarity}`;
+            
+            // Create confetti
+            createConfetti();
+            
+            toggleModal(successModal, true);
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toggleModal(successModal, false);
+                clearConfetti();
+            }, 3000);
+        }
+
+        // Show all sneakers modal
+        function showAllSneakers() {
+            toggleModal(allSneakersModal, true);
+        }
+
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                const randomColor = Math.floor(Math.random() * 6) + 1;
+                confetti.className = `confetti confetti-${randomColor}`;
+                
+                // Random position
+                confetti.style.left = `${Math.random() * 100}%`;
+                
+                // Random size
+                const size = Math.random() * 10 + 5;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                
+                // Random shape
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                
+                // Random animation duration and delay
+                const duration = Math.random() * 2 + 2;
+                const delay = Math.random() * 1;
+                confetti.style.animation = `confetti-fall ${duration}s ease-in-out ${delay}s forwards`;
+                
+                container.appendChild(confetti);
+            }
+        }
+
+        // Clear confetti
+        function clearConfetti() {
+            const container = document.getElementById('confettiContainer');
+            container.innerHTML = '';
+        }
+        // Update counter display
+        function updateCounter() {
+            mintedCounter.textContent = `${mintedCount}/${maxCount}`;
+            remainingLabel.textContent = `${maxCount - mintedCount} remaining`;
+            progressFill.style.width = `${(mintedCount / maxCount) * 100}%`;
+        }
+
+        // Update all sneakers grid
+        function updateAllSneakersGrid() {
+            // Clear existing grids
+            commonGrid.innerHTML = '';
+            uncommonGrid.innerHTML = '';
+            rareGrid.innerHTML = '';
+            legendaryGrid.innerHTML = '';
+            
+            // Add minted sneakers to their respective grids
+            fullCollection.forEach(sneaker => {
+                if (!sneaker.minted) return;
+                
+                const sneakerElement = document.createElement('div');
+                sneakerElement.className = `grid-sneaker ${sneaker.rarity}`; // Добавляем класс редкости
+                sneakerElement.innerHTML = `
+                    <img src="${sneaker.image}" alt="${sneaker.name}" class="grid-sneaker-img">
+                    <div class="grid-sneaker-info">
+                        <div class="grid-sneaker-name">${sneaker.name}</div>
+                        <div class="grid-sneaker-id">#${sneaker.id}</div>
+                    </div>
+                `;
+                
+                // Add to appropriate grid
+                if (sneaker.rarity === 'common') commonGrid.appendChild(sneakerElement);
+                else if (sneaker.rarity === 'uncommon') uncommonGrid.appendChild(sneakerElement);
+                else if (sneaker.rarity === 'rare') rareGrid.appendChild(sneakerElement);
+                else if (sneaker.rarity === 'legendary') legendaryGrid.appendChild(sneakerElement);
+            });
+        }
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = `${Math.random() * 5 + 1}px`;
+                particle.style.height = particle.style.width;
+                particle.style.backgroundColor = i % 2 === 0 ? 'rgba(31, 199, 212, 0.5)' : 'rgba(49, 208, 170, 0.5)';
+                particle.style.borderRadius = '50%';
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.left = `${Math.random() * 100}%`;
+                
+                // Animation
+                particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+            
+            // Add CSS for animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float {
+                    0% { transform: translateY(0) translateX(0); opacity: 0; }
+                    10% { opacity: 1; }
+                    90% { opacity: 1; }
+                    100% { transform: translateY(-100vh) translateX(${Math.random() > 0.5 ? '-' : ''}${Math.random() * 100}px); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Initialize the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+
+</body></html>
